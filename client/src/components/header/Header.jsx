@@ -7,7 +7,7 @@ export default function Header() {
     <>
       <div className={s.header}>
         <Link to='/' className={s.logo}>
-          Винальди
+          Винвальди
         </Link>
         <div className={s.header_menu}>
           <Link to='/menu' className={s.href_header}>

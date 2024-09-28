@@ -1,0 +1,18 @@
+.main {
+  width: 100%;
+  position: relative;
+  height: 600px;
+  top: 49px;
+  margin-bottom: 20px;
+}
+
+.ImageCarousel {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.photo_main {
+  width: 100%;
+  height: 100%;
+}
