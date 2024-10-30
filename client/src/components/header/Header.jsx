@@ -13,12 +13,12 @@ export default function Header() {
           <Link to='/menu' className={s.href_header}>
             <span className={s.span_header}>Меню</span>
           </Link>
-          <a className={s.href_header} href=''>
+          <Link className={s.href_header} href=''>
             <span className={s.span_header}>Бронирование</span>
-          </a>
-          <a className={s.href_header} href=''>
+          </Link>
+          <Link to='/adress' className={s.href_header} href=''>
             <span className={s.span_header}>Адреса</span>
-          </a>
+          </Link>
         </div>
       </div>
     </>

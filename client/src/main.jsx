@@ -4,6 +4,7 @@ import App from './App.jsx';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Menu from './pages/menu/Menu.jsx';
+import Adress from './pages/adres/Adress.jsx';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: '/menu',
     element: <Menu />,
+  },
+  {
+    path: '/adress',
+    element: <Adress />,
   },
 ]);
 

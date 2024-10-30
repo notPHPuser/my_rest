@@ -1,0 +1,53 @@
+.adress {
+  width: 40%;
+  /* height: 500px; */
+  position: relative;
+  /* border: 1px solid red; */
+  margin: 0 auto;
+  top: 100px;
+  /* text-align: center; */
+}
+
+.adress_photo {
+  width: 100%;
+  position: relative;
+}
+
+.name_of_rest {
+  text-decoration: underline;
+  font-size: 23px;
+  margin-bottom: 10px;
+}
+
+.info_about_rest {
+  margin-bottom: 10px;
+}
+
+.adres_text {
+  display: inline-block;
+  transform: skewX(-10deg);
+  margin-bottom: 10px;
+}
+
+.tele_number {
+  color: #917848;
+}
+
+.open_map {
+  color: #917848;
+  width: 30%;
+  height: 40px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #353535;
+  border: none;
+  cursor: pointer;
+}
+
+.footer {
+  position: relative;
+  top: 110px;
+}
