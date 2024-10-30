@@ -5,6 +5,7 @@ import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Menu from './pages/menu/Menu.jsx';
 import Adress from './pages/adres/Adress.jsx';
+import Reservation from './pages/reservation/Reservation.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/adress',
     element: <Adress />,
+  },
+  {
+    path: '/reservarion',
+    element: <Reservation />,
   },
 ]);
 
