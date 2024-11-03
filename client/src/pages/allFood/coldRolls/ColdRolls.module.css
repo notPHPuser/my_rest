@@ -1,0 +1,19 @@
+.cold_rolls {
+  position: relative;
+  top: 150px;
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+ul {
+  list-style-type: none;
+}
+
+.items_cold_rools {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
