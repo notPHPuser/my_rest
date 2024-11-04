@@ -22,7 +22,7 @@ export default function ColdRolls() {
         <ul className={s.items_cold_rools}>
           {cold_rolls.map((roll) => (
             <li key={roll[0]}>
-              <img className={s.img_rolls} src={roll[3]} alt='' width={100} />
+              <img className={s.img_rolls} src={roll[3]} alt='' />
               <p className={s.name_rolls}>{roll[1]}</p>
               <p className={s.price_rolls}>{roll[2]}</p>
             </li>
