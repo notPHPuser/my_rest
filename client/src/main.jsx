@@ -7,6 +7,8 @@ import Menu from './pages/menu/Menu.jsx';
 import Adress from './pages/adres/Adress.jsx';
 import Reservation from './pages/reservation/Reservation.jsx';
 import ColdRolls from './pages/allFood/coldRolls/ColdRolls.jsx';
+import HotRolls from './pages/allFood/hotRolls/HolRolls.jsx';
+import Drinks from './pages/allFood/drinks/Drinks.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
   {
     path: '/menu/coldrolls',
     element: <ColdRolls />,
+  },
+  {
+    path: '/menu/hotrolls',
+    element: <HotRolls />,
+  },
+  {
+    path: '/menu/drinks',
+    element: <Drinks />,
   },
 ]);
 

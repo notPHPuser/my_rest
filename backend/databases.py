@@ -19,6 +19,15 @@ def init_db():
         )
     ''')
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS drinks(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT UNIQUE NOT NULL,
+            price TEXT NOT NULL,
+            img TEXT NOT NULL
+        )
+    ''')
+
     rolls = [
         ('Калифорния', 500, 'https://playbarmaracana.ru/wp-content/uploads/2019/03/4B0A0848.jpg', 'cold'),
         ('Филадельфия', 600, 'https://sushiomsk.com/backend/web/storage/IMG_8875-min.jpg', 'cold'),
@@ -34,9 +43,22 @@ def init_db():
         ('Хот чикен', 400, 'https://sushivi.ru/wp-content/uploads/2023/10/hot-chiken.jpg', 'hot')
     ]
 
+    drinks = [
+        ('чай ассам', 300, 'https://majaro.ru/wa-data/public/shop/products/50/02/250/images/476/476.750.jpg'),
+        ('чай жасминовый', 500, 'https://img.freepik.com/premium-photo/glass-cup-tea-black-background_135932-4426.jpg'),
+        ('кофе Экспроссо', 400, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ775oUryIK5L_ft_P2oLYeAPdLahAkrozEfA&s')
+    ]
+
+    for drink in drinks:
+        cursor.execute('INSERT OR IGNORE INTO drinks (name, price, img) VALUES (?, ?, ?)', drink)
+
     for roll in rolls:
         cursor.execute('INSERT OR IGNORE INTO rolls (name, price, img, type) VALUES (?, ?, ?, ?)', roll)
-
+    # cursor.execute("""
+    #     UPDATE rolls
+    #     SET img = 'https://cdn.foodpicasso.com/assets/2022/07/05/e8112b92cd6c18effd7d47ada2582923---jpg_1000x_103c0_convert.jpg'
+    #     WHERE name = 'Хот чикен';
+    # """)
     conn.commit()
     conn.close()
 
@@ -72,6 +94,16 @@ def get_all_rolls():
     rolls = cursor.fetchall()
     conn.close()
     return jsonify(rolls)
+
+
+@app.route('/drinks', methods=['GET'])
+def get_drinks():
+    conn = sqlite3.connect('restaurant.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM drinks')
+    drinks = cursor.fetchall()
+    conn.close()
+    return jsonify(drinks)
 
 
 if __name__ == '__main__':

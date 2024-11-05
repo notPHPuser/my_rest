@@ -1,4 +1,4 @@
-.cold_rolls {
+.drinks {
   position: relative;
   top: 150px;
   width: 80%;
@@ -14,7 +14,7 @@ ul {
   list-style-type: none;
 }
 
-.items_cold_rools {
+.items_drinks {
   width: 100%;
   /* height: 50%; */
   display: flex;
@@ -25,7 +25,7 @@ ul {
   /* border: 1px solid purple; */
 }
 
-.li_cold_rolls {
+.li_drinks {
   width: 33%;
   margin: 0 auto;
   position: relative;
@@ -37,21 +37,21 @@ ul {
   margin-bottom: 50px;
 }
 
-.img_rolls {
+.img_drinks {
   position: relative;
   width: 50%;
   /* height: 60%; */
 }
 
-.name_rolls {
+.name_drinks {
   font-size: 20px;
 }
 
-.price_rolls {
+.price_drinks {
   font-size: 20px;
 }
 
 .footer {
   position: relative;
-  top: 250px;
+  top: 150px;
 }

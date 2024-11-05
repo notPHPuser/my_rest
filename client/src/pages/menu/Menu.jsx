@@ -16,14 +16,14 @@ export default function Menu() {
           <img className={s.menu_photo} src={cold_rolls} alt='' />
           <button className={s.menu_button}>Холодные роллы</button>
         </Link>
-        <div className={s.menu_item}>
+        <Link to='hotrolls' className={s.menu_item}>
           <img className={s.menu_photo} src={hot_rolls} alt='' />
           <button className={s.menu_button}>Горячие роллы</button>
-        </div>
-        <div className={s.menu_item}>
+        </Link>
+        <Link to='drinks' className={s.menu_item}>
           <img className={s.menu_photo} src={drinks} alt='' />
           <button className={s.menu_button}>Напитки</button>
-        </div>
+        </Link>
       </div>
       <div className={s.footer}>
         <Footer />
