@@ -9,7 +9,9 @@ export default function App() {
     <>
       <Header />
       <Main />
-      <Footer />
+      <div className={s.footer}>
+        <Footer />
+      </div>
       <div className={s.rest}></div>
     </>
   );

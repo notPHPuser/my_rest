@@ -41,6 +41,7 @@ ul {
   position: relative;
   width: 50%;
   /* height: 60%; */
+  margin-bottom: 10px;
 }
 
 .name_drinks {
@@ -52,6 +53,8 @@ ul {
 }
 
 .footer {
-  position: relative;
-  top: 150px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }

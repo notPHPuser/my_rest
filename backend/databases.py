@@ -28,6 +28,26 @@ def init_db():
         )
     ''')
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS reservation (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            table_id INTEGER NOT NULL,
+            phone TEXT NOT NULL,
+            tg TEXT NOT NULL,
+            roll_ids TEXT NOT NULL,
+            FOREIGN KEY (table_id) REFERENCES tables(id)
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS tables (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            status TEXT NOT NULL,
+            phone TEXT,
+            tg TEXT
+        )
+    ''')
+
     rolls = [
         ('Калифорния', 500, 'https://playbarmaracana.ru/wp-content/uploads/2019/03/4B0A0848.jpg', 'cold'),
         ('Филадельфия', 600, 'https://sushiomsk.com/backend/web/storage/IMG_8875-min.jpg', 'cold'),
@@ -59,6 +79,16 @@ def init_db():
     #     SET img = 'https://cdn.foodpicasso.com/assets/2022/07/05/e8112b92cd6c18effd7d47ada2582923---jpg_1000x_103c0_convert.jpg'
     #     WHERE name = 'Хот чикен';
     # """)
+    cursor.execute('''
+        UPDATE drinks
+        SET img = 'https://img.freepik.com/premium-photo/black-coffee-glass-dark-background_409663-325.jpg'
+        WHERE name = 'кофе Экспроссо'
+    ''')
+
+    cursor.execute('SELECT COUNT (*) FROM tables')
+    if cursor.fetchone()[0] == 0:
+        for _ in range(10):
+            cursor.execute('INSERT INTO tables (status, phone, tg) VALUES (?, ?, ?)', ('свободен', None, None))
     conn.commit()
     conn.close()
 
@@ -104,6 +134,46 @@ def get_drinks():
     drinks = cursor.fetchall()
     conn.close()
     return jsonify(drinks)
+
+
+@app.route('/reserve', methods=['POST'])
+def reserve_table():
+    phone = request.json.get('phone')
+    tg = request.json.get('tg')
+    table_id = request.json.get('table_id')
+    roll_ids = ','.join(request.json.get('rolls', []))
+
+    conn = sqlite3.connect('restaurant.db')
+    cursor = conn.cursor()
+    cursor.execute('UPDATE tables SET status = ?, phone = ?, tg = ? WHERE id = ?', ('занят', phone, tg, table_id))
+    cursor.execute('INSERT INTO reservation (table_id, phone, tg, roll_ids) VALUES (?, ?, ?, ?)', (table_id, phone, tg, roll_ids))
+    conn.commit()
+    conn.close()
+    return jsonify({'message': 'Table reserved', 'table_id': table_id})
+
+
+@app.route('/reservations', methods=['GET'])
+def get_reservations():
+    conn = sqlite3.connect('restaurant.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM reservation')
+    reservations = cursor.fetchall()
+
+    reservations_list = []
+    cursor.execute('SELECT * FROM rolls')
+    all_rolls = {str(row[0]): row[1] for row in cursor.fetchall()}
+
+    for reservation in reservations:
+        table_id, phone, tg, roll_ids = reservation[1], reservation[2], reservation[3], reservation[4]
+        roll_names = [all_rolls[roll_id] for roll_id in roll_ids.split(',') if roll_id in all_rolls]
+        reservations_list.append({
+            'phone': phone,
+            'tg': tg,
+            'rolls': roll_names,
+            'table_id': table_id
+        })
+    conn.close()
+    return jsonify(reservations_list)
 
 
 if __name__ == '__main__':
