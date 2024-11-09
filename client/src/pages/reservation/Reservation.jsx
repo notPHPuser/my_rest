@@ -84,8 +84,8 @@ export default function Reservation() {
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    cursor: table[1] === 'свободен' ? 'pointer' : 'not-allowed', // Изменение курсора
-                    opacity: table[1] === 'занят' ? 0.6 : 1, // Уменьшаем непрозрачность занятого стола
+                    cursor: table[1] === 'свободен' ? 'pointer' : 'not-allowed',
+                    opacity: table[1] === 'занят' ? 0.6 : 1,
                   }}
                 >
                   {table[1]} (Стол {table[0]}) {/* Выводим номер стола */}
