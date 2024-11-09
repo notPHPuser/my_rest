@@ -76,4 +76,37 @@
   z-index: 1000;
   width: 50%;
   height: 80vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.button_close {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 3%;
+  z-index: 10;
+}
+
+.tables {
+  position: relative;
+  width: 33%;
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+  top: 40px;
+}
+
+.all_tables {
+  position: relative;
+  width: 50%;
+  height: 50px;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+  border-radius: 3px;
 }

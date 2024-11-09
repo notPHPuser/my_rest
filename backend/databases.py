@@ -176,5 +176,15 @@ def get_reservations():
     return jsonify(reservations_list)
 
 
+@app.route('/tables', methods=['GET'])
+def get_tables():
+    conn = sqlite3.connect('restaurant.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM tables')
+    tables = cursor.fetchall()
+    conn.close()
+    return jsonify(tables)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

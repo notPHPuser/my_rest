@@ -9,6 +9,8 @@ import Reservation from './pages/reservation/Reservation.jsx';
 import ColdRolls from './pages/allFood/coldRolls/ColdRolls.jsx';
 import HotRolls from './pages/allFood/hotRolls/HolRolls.jsx';
 import Drinks from './pages/allFood/drinks/Drinks.jsx';
+import { Provider } from 'react-redux';
+import store from './store/store.js';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 );
