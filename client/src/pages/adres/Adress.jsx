@@ -1,10 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react';
 import s from './Adres.module.css';
 import Header from '../../components/header/Header';
 import adress_photo from './photo/adres.png';
 import Footer from '../../components/footer/Footer';
+import { SquareX } from 'lucide-react';
 
 export default function Adress() {
+  const [isOpen, setIsopen] = useState(false);
+  const myMapRef = useRef(null);
+
+  const loadMap = useCallback(() => {
+    const script = document.createElement('script');
+    script.src =
+      'https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aee914678fbe394a21bc5858d6dd03bbc7b5a8c297b3ce37bb65bfb235fb61273&amp;width=500&amp;height=400&amp;lang=ru_RU&amp;scroll=true';
+    script.async = true;
+    myMapRef.current.appendChild(script);
+  }, []);
+
+  useEffect(() => {
+    if (myMapRef.current) {
+      loadMap();
+    } else {
+      const intervalId = setInterval(() => {
+        if (myMapRef.current) {
+          loadMap();
+          clearInterval(intervalId);
+        }
+      }, 100);
+    }
+    return () => {
+      if (myMapRef.current) {
+        myMapRef.current.innerHTML = '';
+      }
+    };
+  }, []);
+
+  const handleOpen = () => {
+    setIsopen(!isOpen);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isOpen]);
+
   return (
     <>
       <>
@@ -31,7 +73,15 @@ export default function Adress() {
             &#10003; Электричка до станции «Лесной городок» (Киевское
             <br /> направление)
           </p>
-          <button className={s.open_map}>Открыть карту</button>
+          <button onClick={handleOpen} className={s.open_map}>
+            Открыть карту
+          </button>
+          {isOpen && (
+            <div className={s.map}>
+              <SquareX onClick={handleOpen} className={s.button_close} size={30} />
+              <div ref={myMapRef} id='my_map' className={s.map_of_rest}></div>
+            </div>
+          )}
         </div>
         <div className={s.footer}>
           <Footer />
