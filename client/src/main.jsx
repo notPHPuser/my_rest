@@ -11,6 +11,7 @@ import HotRolls from './pages/allFood/hotRolls/HolRolls.jsx';
 import Drinks from './pages/allFood/drinks/Drinks.jsx';
 import { Provider } from 'react-redux';
 import store from './store/store.js';
+import AdminPanel from './pages/admin-panel/AdminPanel.jsx';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: '/menu/drinks',
     element: <Drinks />,
+  },
+  {
+    path: '/adminpanel',
+    element: <AdminPanel />,
   },
 ]);
 
