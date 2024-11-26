@@ -4,7 +4,7 @@ import Header from '../../components/header/Header';
 import s from './Reservation.module.css';
 import adres from '../adres/photo/adres.png';
 import Footer from '../../components/footer/Footer';
-import { Key, SquareX } from 'lucide-react';
+import { SquareX } from 'lucide-react';
 import axios from 'axios';
 
 export default function Reservation() {
