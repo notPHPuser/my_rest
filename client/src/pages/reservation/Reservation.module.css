@@ -79,6 +79,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  overflow-y: auto;
+  max-height: 70vh;
 }
 
 .button_close {
@@ -109,4 +111,29 @@
   text-align: center;
   flex-wrap: wrap;
   border-radius: 3px;
+}
+
+.rools ul {
+  display: flex;
+  flex-wrap: wrap; /* Разрешаем перенос на следующую строку, если роллы не помещаются */
+  justify-content: space-around; /* Распределяем роллы равномерно по ширине */
+}
+
+.rools li {
+  flex: 0 0 33%; /* Занимаем 33% ширины, создавая 3 колонки */
+  box-sizing: border-box; /* Учитываем padding и margin в ширине элемента */
+  margin-bottom: 10px; /* Добавляем отступ снизу */
+}
+
+/*  опционально:  убрать отступы у изображений роллов */
+.rools li img {
+  margin: 0;
+  padding: 0;
+}
+
+.rools {
+  position: absolute;
+  top: 500px;
+  margin: 0 auto;
+  left: 10%;
 }

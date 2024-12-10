@@ -10,7 +10,9 @@ import axios from 'axios';
 export default function Reservation() {
   const [isVisible, setIsVisible] = useState(false);
   const [tables, setTables] = useState([]);
+  const [rolls, setRolls] = useState([]);
   const [reservations, setReservations] = useState([]);
+  const [selectedRolls, setSelectedRolls] = useState({});
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
@@ -29,6 +31,10 @@ export default function Reservation() {
   }, [isVisible]);
 
   useEffect(() => {
+    const fetchRolls = async () => {
+      const response = await axios.get('http://localhost:5000/rolls');
+      setRolls(response.data);
+    };
     const fetchTables = async () => {
       const response = await axios.get('http://127.0.0.1:5000/tables');
       setTables(response.data);
@@ -38,10 +44,36 @@ export default function Reservation() {
       const response = await axios.get('http://127.0.0.1:5000/reservations');
       setReservations(response.data);
     };
-
+    fetchRolls();
     fetchTables();
     fetchReservations();
   }, []);
+  const reserveTable = async (tableId) => {
+    const phone = prompt('Введите номер телефона для бронирования:');
+    const tg = prompt('Введите ваш тг');
+    const selectedRollIds = Object.keys(selectedRolls).filter((id) => selectedRolls[id]);
+
+    await axios.post('http://localhost:5000/reserve', {
+      phone,
+      tg,
+      table_id: tableId,
+      rolls: selectedRollIds,
+    });
+    alert('Столик забронирован!');
+
+    // Обновляем статус столов и резервирования
+    const responseTables = await axios.get('http://localhost:5000/tables');
+    setTables(responseTables.data);
+    const responseReservations = await axios.get('http://localhost:5000/reservations');
+    setReservations(responseReservations.data);
+  };
+
+  const toggleRollSelection = (rollId) => {
+    setSelectedRolls((prevSelected) => ({
+      ...prevSelected,
+      [rollId]: !prevSelected[rollId],
+    }));
+  };
 
   return (
     <>
@@ -92,6 +124,24 @@ export default function Reservation() {
                 </div>
               </div>
             ))}
+            <div className={s.rools}>
+              <h1>Роллы</h1>
+              <ul>
+                {rolls.map((roll) => (
+                  <li key={roll[0]}>
+                    <img src={roll[3]} alt={roll[1]} style={{ width: '100px' }} />
+                    <div>
+                      {roll[1]} - {roll[2]}₽
+                    </div>
+                    <input
+                      type='checkbox'
+                      checked={!!selectedRolls[roll[0]]}
+                      onChange={() => toggleRollSelection(roll[0])}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
         <div className={s.reservation_footer}>
